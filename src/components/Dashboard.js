@@ -5,6 +5,8 @@ import { Box, MenuItem, Paper, Select, Typography } from "@mui/material";
 import Chart from 'react-apexcharts'
 import MainNavbar from "./MainNavbar";
 import Sidebar from "./Sidebar";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 
 
@@ -13,7 +15,83 @@ const Dashboard = () => {
 
     const Title = useTitle();
     const TitleContainer = useTitleContainer();
+const [production, setproduction] = useState(null)
+const [productionIndex, setproductionIndex] = useState(null)
+const [productionValues, setproductionValues] = useState(null)
+const [consumptionIndex, setconsumptionIndex] = useState(null)
+const [consumptionValues, setconsumptionValues] = useState(null)
+const [timberIndex, settimberIndex] = useState(null)
+const [timberValues, settimberValues] = useState(null)
+    
+    // console.log(data);
+     useEffect(() => {
+    //    const response =data()
+    //    console.log(response);
+    // const data = async () => {
+    //     axios.get('http://127.0.0.1:8000/production')
+    // }
+    
+    axios.get('http://127.0.0.1:8000/production')
+    .then((res) => {
+        console.log(res);
+        setproductionIndex(res?.data?.Index)
+        const rounded = res?.data?.Values.map(value => value.toFixed(2))
+        console.log(rounded, 'rounded');
+        setproductionValues(rounded)
+        setproduction(res?.data)
+    }).catch(e => {
+        console.log(e);
+    })
+     }, [])
 
+
+     useEffect(() => {
+        axios.get('http://127.0.0.1:8000/consumption')
+    .then((res) => {
+        console.log(res);
+        setconsumptionIndex(res?.data?.Index)
+        const rounded = res?.data?.Values.map(value => value.toFixed(2))
+        console.log(rounded, 'rounded');
+        setconsumptionValues(rounded)
+        setproduction(res?.data)
+    }).catch(e => {
+        console.log(e);
+    })
+     }, [])
+
+
+     useEffect(() => {
+        axios.get('http://127.0.0.1:8000/consumption')
+    .then((res) => {
+        console.log(res);
+        setconsumptionIndex(res?.data?.Index)
+        const rounded = res?.data?.Values.map(value => value.toFixed(2))
+        console.log(rounded, 'rounded');
+        setconsumptionValues(rounded)
+        setproduction(res?.data)
+    }).catch(e => {
+        console.log(e);
+    })
+     }, [])
+
+     useEffect(() => {
+        axios.get('http://127.0.0.1:8000/timber')
+    .then((res) => {
+        console.log(res);
+        settimberIndex(res?.data?.Index)
+        const rounded = res?.data?.Values.map(value => value.toFixed(2))
+        console.log(rounded, 'rounded');
+        settimberValues(rounded)
+        setproduction(res?.data)
+    }).catch(e => {
+        console.log(e);
+    })
+     }, [])
+     
+     console.log(timberIndex);
+     console.log(timberValues);
+     console.log(production);
+     
     const chartOptions = {
         options: {
             chart: {
@@ -30,13 +108,51 @@ const Dashboard = () => {
                 curve: 'smooth'
             },
             xaxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                // categories: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            // categories: production?.Index 
+            categories: productionIndex 
+            // categories: [...production?.Index]
             }
         },
         series: [
             {
                 name: "series-1",
-                data: [30, 40, 45, 50, 49, 60, 70, 91, 65, 40, 45, 62]
+                // data:production?.Values
+                data:productionValues
+                // data: [30, 40, 45, 50, 49, 60, 70, 91, 65, 40, 45, 62]
+            }
+        ]
+    }
+
+
+    const chartOptionsConsumption = {
+        options: {
+            chart: {
+                id: "basic-bar"
+            },
+            // fill:{
+            //     colors:['']
+            // },
+            // markers:{
+            //     colors:['red']
+            // },
+            colors: ["rgb(0, 128, 0)", 'rgb(120, 236, 120)', 'rgb(178, 226, 178)'],
+            stroke: {
+                curve: 'smooth'
+            },
+            xaxis: {
+                // categories: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+            // categories: production?.Index 
+            categories: consumptionIndex 
+            // categories: [...production?.Index]
+            }
+        },
+        series: [
+            {
+                name: "series-1",
+                // data:production?.Values
+                data:consumptionValues
+                // data: [30, 40, 45, 50, 49, 60, 70, 91, 65, 40, 45, 62]
             }
         ]
     }
@@ -77,8 +193,8 @@ const Dashboard = () => {
         chart: {
             // width:'',
             type: 'bar',
-            stacked: true,
-            stackType: "99%",
+            stacked: false,
+            // stackType: "99%",
         },
         grid: {
             show: false,
@@ -101,172 +217,215 @@ const Dashboard = () => {
         },
         // rgb(120, 236, 120)
         series: [{
-            data: [{
-                x: 'Jan',
-                y: 10,
-                fillColor: 'rgb(0, 128, 0)'
-            }, {
-                x: 'Feb',
-                y: 18,
-                fillColor: 'rgb(0, 128, 0)'
-            }, {
-                x: 'Mar',
-                y: 5,
-                fillColor: 'rgb(0, 128, 0)'
-            }, {
-                x: 'Apr',
-                y: 13,
-                fillColor: 'rgb(0, 128, 0)'
-            }
-                , {
-                x: 'May',
-                y: 13,
-                fillColor: 'rgb(0, 128, 0)'
-            }
-                , {
-                x: 'Jun',
-                y: 13,
-                fillColor: 'rgb(0, 128, 0)'
-            }
-                , {
-                x: 'Jul',
-                y: 13,
-                fillColor: 'rgb(0, 128, 0)'
-            }, {
-                x: 'Aug',
-                y: 13,
-                fillColor: 'rgb(0, 128, 0)'
-            }, {
-                x: 'Sep',
-                y: 13,
-                fillColor: 'rgb(0, 128, 0)'
-            }, {
-                x: 'Oct',
-                y: 13,
-                fillColor: 'rgb(0, 128, 0)'
-            }, {
-                x: 'Nov',
-                y: 13,
-                fillColor: 'rgb(0, 128, 0)'
-            }, {
-                x: 'Dec',
-                y: 13,
-                fillColor: 'rgb(0, 128, 0)'
-            }
+            data:
+            [{
+                        x: 'Jan',
+                        y: 10,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }, {
+                        x: 'Feb',
+                        y: 18,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }, {
+                        x: 'Mar',
+                        y: 9,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }, {
+                        x: 'Apr',
+                        y: 13,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }
+                        , {
+                        x: 'May',
+                        y: 13,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }
+                        , {
+                        x: 'Jun',
+                        y: 13,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }
+                        , {
+                        x: 'Jul',
+                        y: 13,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }, {
+                        x: 'Aug',
+                        y: 13,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }, {
+                        x: 'Sep',
+                        y: 13,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }, {
+                        x: 'Oct',
+                        y: 13,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }, {
+                        x: 'Nov',
+                        y: 13,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }, {
+                        x: 'Dec',
+                        y: 13,
+                        fillColor: 'rgb(120, 236, 120)',
+                    }
+        
+                    ]
+            //  [{
+            //     x: timberIndex[0],
+            //     y: timberValues[0],
+            //     fillColor: 'rgb(120, 236, 120)'
+            // }, {
+            //     x: timberIndex[1],
+            //     y: timberValues[1],
+            //     fillColor: 'rgb(0, 128, 0)'
+            // }, {
+            //     x: timberIndex[2],
+            //     y: timberValues[2],
+            //     fillColor: 'rgb(0, 128, 0)'
+            // }, {
+            //     x: timberIndex[3],
+            //     y: timberValues[3],
+            //     fillColor: 'rgb(0, 128, 0)'
+            // }
+            //     , {
+            //     x: timberIndex[4],
+            //     y: timberValues[4],
+            //     fillColor: 'rgb(0, 128, 0)'
+            // }
+            //     , {
+            //     x: timberIndex[5],
+            //     y: timberValues[5],
+            //     fillColor: 'rgb(0, 128, 0)'
+            // }
+            //     , {
+            //     x: timberIndex[6],
+            //     y: timberValues[6],
+            //     fillColor: 'rgb(0, 128, 0)'
+            // }, {
+            //     x: timberIndex[7],
+            //     y: timberValues[7],
+            //     fillColor: 'rgb(0, 128, 0)'
+            // }, {
+            //     x: timberIndex[8],
+            //     y: timberValues[8],
+            //     fillColor: 'rgb(0, 128, 0)'
+            // }
 
-            ]
+            // ]
         },
-        {
-            data: [{
-                x: 'Jan',
-                y: 10,
-                fillColor: 'rgb(120, 236, 120)',
-            }, {
-                x: 'Feb',
-                y: 18,
-                fillColor: 'rgb(120, 236, 120)',
-            }, {
-                x: 'Mar',
-                y: 9,
-                fillColor: 'rgb(120, 236, 120)',
-            }, {
-                x: 'Apr',
-                y: 13,
-                fillColor: 'rgb(120, 236, 120)',
-            }
-                , {
-                x: 'May',
-                y: 13,
-                fillColor: 'rgb(120, 236, 120)',
-            }
-                , {
-                x: 'Jun',
-                y: 13,
-                fillColor: 'rgb(120, 236, 120)',
-            }
-                , {
-                x: 'Jul',
-                y: 13,
-                fillColor: 'rgb(120, 236, 120)',
-            }, {
-                x: 'Aug',
-                y: 13,
-                fillColor: 'rgb(120, 236, 120)',
-            }, {
-                x: 'Sep',
-                y: 13,
-                fillColor: 'rgb(120, 236, 120)',
-            }, {
-                x: 'Oct',
-                y: 13,
-                fillColor: 'rgb(120, 236, 120)',
-            }, {
-                x: 'Nov',
-                y: 13,
-                fillColor: 'rgb(120, 236, 120)',
-            }, {
-                x: 'Dec',
-                y: 13,
-                fillColor: 'rgb(120, 236, 120)',
-            }
+        // {
+        //     data: [{
+        //         x: 'Jan',
+        //         y: 10,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }, {
+        //         x: 'Feb',
+        //         y: 18,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }, {
+        //         x: 'Mar',
+        //         y: 9,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }, {
+        //         x: 'Apr',
+        //         y: 13,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }
+        //         , {
+        //         x: 'May',
+        //         y: 13,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }
+        //         , {
+        //         x: 'Jun',
+        //         y: 13,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }
+        //         , {
+        //         x: 'Jul',
+        //         y: 13,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }, {
+        //         x: 'Aug',
+        //         y: 13,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }, {
+        //         x: 'Sep',
+        //         y: 13,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }, {
+        //         x: 'Oct',
+        //         y: 13,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }, {
+        //         x: 'Nov',
+        //         y: 13,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }, {
+        //         x: 'Dec',
+        //         y: 13,
+        //         fillColor: 'rgb(120, 236, 120)',
+        //     }
+
+        //     ]
+        // }, {
+        //     data: [{
+        //         x: 'Jan',
+        //         y: 10,
+        //         fillColor: '#E6EDF9'
+        //     }, {
+        //         x: 'Feb',
+        //         y: 18,
+        //         fillColor: '#E6EDF9'
+        //     }, {
+        //         x: 'Mar',
+        //         y: 2,
+        //         fillColor: '#E6EDF9'
+        //     }, {
+        //         x: 'Apr',
+        //         y: 13,
+        //         fillColor: '#E6EDF9'
+        //     }
+        //         , {
+        //         x: 'May',
+        //         y: 13,
+        //         fillColor: '#E6EDF9'
+        //     }
+        //         , {
+        //         x: 'Jun',
+        //         y: 13,
+        //         fillColor: '#E6EDF9'
+        //     }
+        //         , {
+        //         x: 'Jul',
+        //         y: 13,
+        //         fillColor: '#E6EDF9'
+        //     }, {
+        //         x: 'Aug',
+        //         y: 13,
+        //         fillColor: '#E6EDF9'
+        //     }, {
+        //         x: 'Sep',
+        //         y: 13,
+        //         fillColor: '#E6EDF9'
+        //     }, {
+        //         x: 'Oct',
+        //         y: 13,
+        //         fillColor: '#E6EDF9'
+        //     }, {
+        //         x: 'Nov',
+        //         y: 13,
+        //         fillColor: '#E6EDF9'
+        //     }, {
+        //         x: 'Dec',
+        //         y: 13,
+        //         fillColor: '#E6EDF9'
+        //     }
 
             ]
-        }, {
-            data: [{
-                x: 'Jan',
-                y: 10,
-                fillColor: '#E6EDF9'
-            }, {
-                x: 'Feb',
-                y: 18,
-                fillColor: '#E6EDF9'
-            }, {
-                x: 'Mar',
-                y: 2,
-                fillColor: '#E6EDF9'
-            }, {
-                x: 'Apr',
-                y: 13,
-                fillColor: '#E6EDF9'
-            }
-                , {
-                x: 'May',
-                y: 13,
-                fillColor: '#E6EDF9'
-            }
-                , {
-                x: 'Jun',
-                y: 13,
-                fillColor: '#E6EDF9'
-            }
-                , {
-                x: 'Jul',
-                y: 13,
-                fillColor: '#E6EDF9'
-            }, {
-                x: 'Aug',
-                y: 13,
-                fillColor: '#E6EDF9'
-            }, {
-                x: 'Sep',
-                y: 13,
-                fillColor: '#E6EDF9'
-            }, {
-                x: 'Oct',
-                y: 13,
-                fillColor: '#E6EDF9'
-            }, {
-                x: 'Nov',
-                y: 13,
-                fillColor: '#E6EDF9'
-            }, {
-                x: 'Dec',
-                y: 13,
-                fillColor: '#E6EDF9'
-            }
-
-            ]
-        }]
+        // }]
     }
 
 
@@ -361,8 +520,8 @@ const Dashboard = () => {
                             </Select>
                         </Box>
                         <Chart
-                            options={chartOptions.options}
-                            series={chartOptions.series}
+                            options={chartOptionsConsumption.options}
+                            series={chartOptionsConsumption.series}
                             type="area"
                             width="90%"
                             height='290'
@@ -426,7 +585,52 @@ export default Dashboard;
 
 
 
-{/* <MainNavbar />
-     <Box sx={{display:'flex'}} >
-            <Sidebar /> */}
+// data: 
+//             [{
+//                 x: timberIndex[0],
+//                 y: 10,
+//                 fillColor: 'rgb(120, 236, 120)'
+//             }, {
+//                 x: timberIndex[1],
+//                 y: 18,
+//                 fillColor: 'rgb(0, 128, 0)'
+//             }, {
+//                 x: timberIndex[2],
+//                 y: 5,
+//                 fillColor: 'rgb(0, 128, 0)'
+//             }, {
+//                 x: timberIndex[3],
+//                 y: 13,
+//                 fillColor: 'rgb(0, 128, 0)'
+//             }
+//                 , {
+//                 x: timberIndex[4],
+//                 y: 13,
+//                 fillColor: 'rgb(0, 128, 0)'
+//             }
+//                 , {
+//                 x: timberIndex[5],
+//                 y: 13,
+//                 fillColor: 'rgb(0, 128, 0)'
+//             }
+//                 , {
+//                 x: timberIndex[6],
+//                 y: 13,
+//                 fillColor: 'rgb(0, 128, 0)'
+//             }, {
+//                 x: timberIndex[7],
+//                 y: 13,
+//                 fillColor: 'rgb(0, 128, 0)'
+//             }, {
+//                 x: timberIndex[8],
+//                 y: 13,
+//                 fillColor: 'rgb(0, 128, 0)'
+//             }, {
+//                 x: timberIndex[9],
+//                 y: 13,
+//                 fillColor: 'rgb(0, 128, 0)'
+//             }
+
+//             ]
+//         },
 

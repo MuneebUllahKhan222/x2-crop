@@ -11,12 +11,12 @@ import '../App.css'
 function Home() {
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <Box className='home-farm'>
+            <Box className='home-farm' sx={{height:'80vh'}} >
                 <Typography variant='h1' fontWeight={550} sx={{ color: 'white' }}>X2 CROP</Typography>
                 <Typography variant='h4' sx={{ color: 'white' }}>Growing solution for a thriving agriculture solution.</Typography>
                 <Paper elevation={5} className='home-div' sx={{ width: '70vw', borderRadius: '20px', display: 'flex', marginTop: '100px', height: '45%', backgroundColor: 'white' }}>
                     
-                    <Box sx={{ borderRight: '1px solid black', width: '33.25%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
+                    <Box sx={{ borderRight: '1px solid black', width: '33.25%' ,display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
                         <img src={brokenCircle} alt='broken' width={75} height={75} />
                         <Typography sx={{ color: 'black', fontSize: '20px', fontWeight: '550' }} >Suitable Sites/Location <br /> and Agricultural Offices</Typography>
                         <button className='learn-more'>learn more</button>
