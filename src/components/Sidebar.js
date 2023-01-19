@@ -98,33 +98,6 @@ export default function Sidebar() {
           </Link>
         </Icon>
         <Icon>
-          {/* <Link to={"/users"}> */}
-            <SupervisedUserCircleIcon
-              sx={{
-                fontSize: 25,
-                color: location.pathname === "/users" ? "green" : "#6F6F6F",
-                "@media (max-width: 700px)": {
-                  fontSize: 20,
-                },
-              }}
-            />
-          {/* </Link> */}
-        </Icon>
-        <Icon>
-          {/* <Link to={"/services"}> */}
-            <EqualizerIcon
-              sx={{
-                fontSize: 25,
-                color:
-                  location.pathname === "/services" ? "green" : "#6F6F6F",
-                "@media (max-width: 700px)": {
-                  fontSize: 20,
-                },
-              }}
-            />
-          {/* </Link> */}
-        </Icon>
-        <Icon>
           <Link to={"/blogs"}>
             <TopicIcon
               sx={{

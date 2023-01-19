@@ -1,16 +1,20 @@
 import { Box, Stack, Typography } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import EmailIcon from '@mui/icons-material/Email';
 import '../App.css'
 import Logo from '../assets/150x150logo.png'
 import { useStateValue } from '../context/StateProvider';
+import { useNavigate } from 'react-router-dom';
+import Aboutus from './Aboutus';
 
 
 
 function Footer() {
     const [{user}, dispatch]  =useStateValue();
-
+    const [modal, setModal] = useState(false);
+    
+    const navigate = useNavigate()
     const loginClick = () => {
         if (!user) {
             dispatch({
@@ -18,6 +22,44 @@ function Footer() {
             });
         }
     }
+
+    const learnMoreAgriculture = () => {
+        if (user) {
+            navigate('/locations');
+        } else {
+            dispatch({
+                type: 'OPENLOGINDIALOG'
+            });
+        }
+    }
+
+    const learnMoreDashboard = () => {
+        if (user) {
+            navigate('/dashboard');
+        } else {
+            dispatch({
+                type: 'OPENLOGINDIALOG'
+            });
+        }
+    }
+
+    const learnMoreBlogs = () => {
+        if (user) {
+            navigate('/blogs');
+        } else {
+            dispatch({
+                type: 'OPENLOGINDIALOG'
+            });
+        }
+    }
+
+    const toggleModal= () => {
+        setModal(true)
+      }
+    
+      const toggleModalOff= () => {
+        setModal(false)
+      }
 
   return (
     <>
@@ -38,10 +80,10 @@ function Footer() {
         </Stack>
         <Box sx={{color:'white'}} >
             <Stack direction={'column'}>
-                <Typography className='footer-hover' variant='subtitle2'>About US</Typography>
-                <Typography mt={1} className='footer-hover' variant='subtitle2'>FAQ</Typography>
-                <Typography mt={1} className='footer-hover' variant='subtitle2'>Analytics</Typography>
-                <Typography mt={1} className='footer-hover' variant='subtitle2'>Sites/Locations</Typography>
+                <Typography className='footer-hover' variant='subtitle2' onClick={toggleModal}>About US</Typography>
+                <Typography mt={1} className='footer-hover' variant='subtitle2' onClick={learnMoreBlogs} >Blogs</Typography>
+                <Typography mt={1} className='footer-hover' variant='subtitle2' onClick={learnMoreDashboard}>Analytics</Typography>
+                <Typography mt={1} className='footer-hover' variant='subtitle2' onClick={learnMoreAgriculture} >Sites/Locations</Typography>
                 <Typography mt={1} onClick={loginClick} className='footer-hover' variant='subtitle2'>Login/Register</Typography>
             </Stack>
         </Box>
@@ -50,6 +92,7 @@ function Footer() {
         <Box sx={{width:'70%', height:'2px' ,borderTop:'1px solid white'}}></Box>
         Copyright  X2 Crop - All rights reserverd
     </Box>
+    <Aboutus open={modal} handleClose={toggleModalOff}/>
     </>
   )
 }

@@ -27,7 +27,7 @@ export default function MainNavbar() {
         height: "62px",
         background: "#FFFFFF",
         boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.12)",
-        padding: "0px 20px",
+        padding: "0px 0px",
         top: "0px",
         left: "0px",
         width: "100%",

@@ -1,14 +1,51 @@
 import { Box, Paper, Typography } from '@mui/material'
 import React from 'react'
 import brokenCircle from '../assets/Asset 3.png'
+import star from '../assets/Asset 4.png'
+import locations from '../assets/Asset 5.png'
 import pakistan from '../assets/pakistan.png'
 import '../App.css'
+import { useStateValue } from '../context/StateProvider'
+import { useNavigate } from 'react-router-dom'
 
 
 
 
 
 function Home() {
+
+    const [{user}, dispatch]  =useStateValue();
+    const navigate = useNavigate()
+    const learnMoreAgriculture = () => {
+        if (user) {
+            navigate('/locations');
+        } else {
+            dispatch({
+                type: 'OPENLOGINDIALOG'
+            });
+        }
+    }
+
+    const learnMoreDashboard = () => {
+        if (user) {
+            navigate('/dashboard');
+        } else {
+            dispatch({
+                type: 'OPENLOGINDIALOG'
+            });
+        }
+    }
+
+    const learnMoreBlogs = () => {
+        if (user) {
+            navigate('/blogs');
+        } else {
+            dispatch({
+                type: 'OPENLOGINDIALOG'
+            });
+        }
+    }
+
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <Box className='home-farm' sx={{height:'80vh'}} >
@@ -17,21 +54,21 @@ function Home() {
                 <Paper elevation={5} className='home-div' sx={{ width: '70vw', borderRadius: '20px', display: 'flex', marginTop: '100px', height: '45%', backgroundColor: 'white' }}>
                     
                     <Box sx={{ borderRight: '1px solid black', width: '33.25%' ,display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }} >
-                        <img src={brokenCircle} alt='broken' width={75} height={75} />
+                        <img src={locations} alt='broken' width={75} height={75} />
                         <Typography sx={{ color: 'black', fontSize: '20px', fontWeight: '550' }} >Suitable Sites/Location <br /> and Agricultural Offices</Typography>
-                        <button className='learn-more'>learn more</button>
+                        <button className='learn-more' onClick={learnMoreAgriculture}>learn more</button>
                     </Box>
 
                     <Box sx={{ borderRight: '1px solid black', width: '33.25%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
                         <img src={brokenCircle} alt='broken' width={75} height={75} />
                         <Typography sx={{ color: 'black', fontSize: '20px', fontWeight: '550' }} >Data Analytics</Typography>
-                        <button className='learn-more'>learn more</button>
+                        <button className='learn-more' onClick={learnMoreDashboard}>learn more</button>
                     </Box>
 
                     <Box sx={{ width: '33.25%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                        <img src={brokenCircle} alt='broken' width={75} height={75} />
-                        <Typography sx={{ color: 'black', fontSize: '20px', fontWeight: '550' }} >Data Analytics</Typography>
-                        <button className='learn-more'>learn more</button>
+                        <img src={star} alt='broken' width={75} height={75} />
+                        <Typography sx={{ color: 'black', fontSize: '20px', fontWeight: '550' }} >Informative Blogs</Typography>
+                        <button className='learn-more' onClick={learnMoreBlogs}  >learn more</button>
                     </Box>
 
                 </Paper>
@@ -64,7 +101,7 @@ function Home() {
                     they buy and eat. Ultimately, the goal of the agriculture website is to support the growth and success of the agriculture industry, while also con-
                     tributing to the health and well-being of individuals and communities around the world.
                 </Typography>
-                <button className='learn-more-footer'>Learn more</button>
+                <button className='learn-more-footer' onClick={learnMoreDashboard} >Learn more</button>
                 </Box>
             </Box>
 

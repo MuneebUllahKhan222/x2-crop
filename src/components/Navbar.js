@@ -39,9 +39,9 @@ function Navbar() {
         <Box pl={4} pr={4} pt={2} pb={2} sx={{display:'flex', alignItems:'center', justifyContent:'space-around',backgroundColor:'white', color:'black', height:'10vh'}}>
             <Box > 
                 {/* <Button sx={{color:"black"}} variant='text'>Weather</Button> */}
-                <Button variant='text' sx={{color:"black"}} >Blogs</Button>
-                <Button variant='text' sx={{color:"black"}} >Analytics</Button>
-                <Button variant='text' sx={{color:"black"}} >Sites/Locations</Button>
+                <Button variant='text' sx={{color:"black"}} onClick={handleOpen} >Blogs</Button>
+                <Button variant='text' sx={{color:"black"}}  onClick={handleOpen}>Analytics</Button>
+                <Button variant='text' sx={{color:"black"}} onClick={handleOpen} >Sites/Locations</Button>
             </Box>
 
             <Box mr={20}>

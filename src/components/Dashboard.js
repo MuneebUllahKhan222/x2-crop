@@ -21,7 +21,7 @@ const [productionValues, setproductionValues] = useState(null)
 const [consumptionIndex, setconsumptionIndex] = useState(null)
 const [consumptionValues, setconsumptionValues] = useState(null)
 const [timberIndex, settimberIndex] = useState(null)
-const [timberValues, settimberValues] = useState(null)
+const [timberValues, settimberValues] = useState([])
     
     // console.log(data);
      useEffect(() => {
@@ -110,9 +110,26 @@ const [timberValues, settimberValues] = useState(null)
             xaxis: {
                 // categories: ['Jan', 'Feb', 'Mar', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             // categories: production?.Index 
-            categories: productionIndex 
+            categories: productionIndex,
+            labels:{
+                show:false
+            }
             // categories: [...production?.Index]
             }
+        },
+        title:{
+            // text: 'Production Index per',
+            // align: 'left',
+            // margin: 10,
+            // offsetX: 0,
+            // offsetY: 0,
+            // floating: false,
+            style: {
+            fontSize:  '14px',
+            fontWeight:  'bold',
+            fontFamily:  undefined,
+            color:  '#263238'
+            },
         },
         series: [
             {
@@ -185,7 +202,7 @@ const [timberValues, settimberValues] = useState(null)
                 }
             }
         },
-        labels: ['Sindh', 'Kpk', 'Punjab']
+        labels: ['Punjab','Sindh', 'Kpk' ]
     };
 
 
@@ -200,14 +217,14 @@ const [timberValues, settimberValues] = useState(null)
             show: false,
         },
         yaxis: {
-            show: false
+            show: true
         },
         xaxis: {
-            position: 'top'
+            position: 'bottom'
         },
         plotOptions: {
             bar: {
-                columnWidth: '45%',
+                columnWidth: '60%',
                 borderRadius: 10,
                 borderRadiusApplication: 'end',
             },
@@ -219,221 +236,60 @@ const [timberValues, settimberValues] = useState(null)
         series: [{
             data:
             [{
-                        x: 'Jan',
-                        y: 10,
-                        fillColor: 'rgb(120, 236, 120)',
+                        x: '2011',
+                        y: timberValues[0] ,
+                        fillColor: 'rgb(0, 128, 0)',
                     }, {
-                        x: 'Feb',
-                        y: 18,
-                        fillColor: 'rgb(120, 236, 120)',
+                        x: '2012',
+                        y: timberValues[1] || null,
+                        fillColor: 'rgb(0, 128, 0)',
                     }, {
-                        x: 'Mar',
-                        y: 9,
-                        fillColor: 'rgb(120, 236, 120)',
+                        x: '2013',
+                        y: timberValues[2] || null,
+                        fillColor: 'rgb(0, 128, 0)',
                     }, {
-                        x: 'Apr',
-                        y: 13,
-                        fillColor: 'rgb(120, 236, 120)',
+                        x: '2014',
+                        y: timberValues[3] || null,
+                        fillColor: 'rgb(0, 128, 0)',
                     }
                         , {
-                        x: 'May',
-                        y: 13,
-                        fillColor: 'rgb(120, 236, 120)',
+                        x: '2015',
+                        y: timberValues[4] || null,
+                        fillColor: 'rgb(0, 128, 0)',
                     }
                         , {
-                        x: 'Jun',
-                        y: 13,
-                        fillColor: 'rgb(120, 236, 120)',
+                        x: '2016',
+                        y: timberValues[5] || null,
+                        fillColor: 'rgb(0, 128, 0)',
                     }
                         , {
-                        x: 'Jul',
-                        y: 13,
-                        fillColor: 'rgb(120, 236, 120)',
+                        x: '2017',
+                        y: timberValues[6] || null,
+                        fillColor: 'rgb(0, 128, 0)',
                     }, {
-                        x: 'Aug',
-                        y: 13,
-                        fillColor: 'rgb(120, 236, 120)',
+                        x: '2018',
+                        y: timberValues[7] || null,
+                        fillColor: 'rgb(0, 128, 0)',
                     }, {
-                        x: 'Sep',
-                        y: 13,
-                        fillColor: 'rgb(120, 236, 120)',
+                        x: '2019',
+                        y: timberValues[8] || null,
+                        fillColor: 'rgb(0, 128, 0)',
                     }, {
-                        x: 'Oct',
-                        y: 13,
-                        fillColor: 'rgb(120, 236, 120)',
-                    }, {
-                        x: 'Nov',
-                        y: 13,
-                        fillColor: 'rgb(120, 236, 120)',
-                    }, {
-                        x: 'Dec',
-                        y: 13,
-                        fillColor: 'rgb(120, 236, 120)',
-                    }
-        
+                        x: '2020',
+                        y: timberValues[9] || null,
+                        fillColor: 'rgb(0, 128, 0)',
+                    },
                     ]
-            //  [{
-            //     x: timberIndex[0],
-            //     y: timberValues[0],
-            //     fillColor: 'rgb(120, 236, 120)'
-            // }, {
-            //     x: timberIndex[1],
-            //     y: timberValues[1],
-            //     fillColor: 'rgb(0, 128, 0)'
-            // }, {
-            //     x: timberIndex[2],
-            //     y: timberValues[2],
-            //     fillColor: 'rgb(0, 128, 0)'
-            // }, {
-            //     x: timberIndex[3],
-            //     y: timberValues[3],
-            //     fillColor: 'rgb(0, 128, 0)'
-            // }
-            //     , {
-            //     x: timberIndex[4],
-            //     y: timberValues[4],
-            //     fillColor: 'rgb(0, 128, 0)'
-            // }
-            //     , {
-            //     x: timberIndex[5],
-            //     y: timberValues[5],
-            //     fillColor: 'rgb(0, 128, 0)'
-            // }
-            //     , {
-            //     x: timberIndex[6],
-            //     y: timberValues[6],
-            //     fillColor: 'rgb(0, 128, 0)'
-            // }, {
-            //     x: timberIndex[7],
-            //     y: timberValues[7],
-            //     fillColor: 'rgb(0, 128, 0)'
-            // }, {
-            //     x: timberIndex[8],
-            //     y: timberValues[8],
-            //     fillColor: 'rgb(0, 128, 0)'
-            // }
-
-            // ]
         },
-        // {
-        //     data: [{
-        //         x: 'Jan',
-        //         y: 10,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }, {
-        //         x: 'Feb',
-        //         y: 18,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }, {
-        //         x: 'Mar',
-        //         y: 9,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }, {
-        //         x: 'Apr',
-        //         y: 13,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }
-        //         , {
-        //         x: 'May',
-        //         y: 13,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }
-        //         , {
-        //         x: 'Jun',
-        //         y: 13,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }
-        //         , {
-        //         x: 'Jul',
-        //         y: 13,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }, {
-        //         x: 'Aug',
-        //         y: 13,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }, {
-        //         x: 'Sep',
-        //         y: 13,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }, {
-        //         x: 'Oct',
-        //         y: 13,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }, {
-        //         x: 'Nov',
-        //         y: 13,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }, {
-        //         x: 'Dec',
-        //         y: 13,
-        //         fillColor: 'rgb(120, 236, 120)',
-        //     }
-
-        //     ]
-        // }, {
-        //     data: [{
-        //         x: 'Jan',
-        //         y: 10,
-        //         fillColor: '#E6EDF9'
-        //     }, {
-        //         x: 'Feb',
-        //         y: 18,
-        //         fillColor: '#E6EDF9'
-        //     }, {
-        //         x: 'Mar',
-        //         y: 2,
-        //         fillColor: '#E6EDF9'
-        //     }, {
-        //         x: 'Apr',
-        //         y: 13,
-        //         fillColor: '#E6EDF9'
-        //     }
-        //         , {
-        //         x: 'May',
-        //         y: 13,
-        //         fillColor: '#E6EDF9'
-        //     }
-        //         , {
-        //         x: 'Jun',
-        //         y: 13,
-        //         fillColor: '#E6EDF9'
-        //     }
-        //         , {
-        //         x: 'Jul',
-        //         y: 13,
-        //         fillColor: '#E6EDF9'
-        //     }, {
-        //         x: 'Aug',
-        //         y: 13,
-        //         fillColor: '#E6EDF9'
-        //     }, {
-        //         x: 'Sep',
-        //         y: 13,
-        //         fillColor: '#E6EDF9'
-        //     }, {
-        //         x: 'Oct',
-        //         y: 13,
-        //         fillColor: '#E6EDF9'
-        //     }, {
-        //         x: 'Nov',
-        //         y: 13,
-        //         fillColor: '#E6EDF9'
-        //     }, {
-        //         x: 'Dec',
-        //         y: 13,
-        //         fillColor: '#E6EDF9'
-        //     }
-
             ]
-        // }]
     }
 
 
     return (
         <>
-        <Box sx={{ width: '100%',display: "flex", flexDirection: "column"}} >
+        {/* <Box sx={{ display: "flex", flexDirection: "column"}} > */}
         <MainNavbar />
-        <Box sx={{display:'flex'}} >
+        <Box sx={{display:'flex', width:'99%'}} >
             <Sidebar/>
             <Box sx={{ width: "calc(100% - 55px)", display: { sm: 'block', xs: 'flex' }, justifyContent: 'center', alignItems: 'center', flexDirection: 'column'}}>
             <TitleContainer style={{ marginBottom: "30px" }}>
@@ -444,12 +300,12 @@ const [timberValues, settimberValues] = useState(null)
 
                 {/* Component from here */}
 
-                <Box mb={7} sx={{ width: '100%', height: '50%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                <Box mb={0} sx={{ width: '100%', height: '50%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
 
             <Box sx={{ width: '50%', height: 'max-content', display: 'flex', flexDirection: 'column' }} >
                 <Box mb={2} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Typography sx={{ fontSize: '20px', fontWeight: '700' }} >Total Users on platform</Typography>
-                    <Typography sx={{ fontSize: '18px', fontWeight: '550' }} >Year</Typography>
+                    <Typography sx={{ fontSize: '20px', fontWeight: '700' }} >Production index over the years</Typography>
+                    {/* <Typography sx={{ fontSize: '18px', fontWeight: '550' }} >Year</Typography> */}
                 </Box>
                 <Paper elevation={2} sx={{ width: '100%', margin: '0 auto', padding: '20px', backgroundColor: '#FBFBFB', borderRadius: '10px' }}>
                     <Chart
@@ -463,9 +319,9 @@ const [timberValues, settimberValues] = useState(null)
             </Box>
 
                   <Box sx={{ width: '40%', height: 'max-content', display: 'flex', flexDirection: 'column' }}>
-                      <Box mb={2} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                          <Typography sx={{ fontSize: '20px', fontWeight: '700' }} >Users Stats </Typography>
-                          <Typography sx={{ fontSize: '18px', fontWeight: '550' }} >Year</Typography>
+                      <Box mb={0} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <Typography sx={{ fontSize: '20px', fontWeight: '700' }} >Growth index by province </Typography>
+                          <Typography sx={{ fontSize: '18px', fontWeight: '550' }} ></Typography>
 
                       </Box>
                       <Paper elevation={2} sx={{ width: '100%', margin: '0 auto', padding: '20px', backgroundColor: '#FBFBFB', borderRadius: '10px', display:'flex', justifyContent:'flex-start' }}>
@@ -478,16 +334,16 @@ const [timberValues, settimberValues] = useState(null)
                           />
                           <Box ml={8} mt={4} sx={{display:'flex', flexDirection:'column', alignItems:'space-around', justifyContent:'center'}}>
                               <Box sx={{display:'flex', flexDirection:'column'}}>
-                                  <Typography sx={{fontWeight:'550', fontSize:'15px'}} >Sindh</Typography>
+                                  <Typography sx={{fontWeight:'550', fontSize:'15px'}} >Punjab</Typography>
                                   <Typography sx={{fontWeight:'650', fontSize:'19px'}} >8085</Typography>
                               </Box>
                               <Box sx={{display:'flex', flexDirection:'column'}}>
-                              <Typography sx={{fontWeight:'550', fontSize:'15px'}} >KPK</Typography>
-                                  <Typography sx={{fontWeight:'650', fontSize:'19px'}} >2000</Typography>
+                              <Typography sx={{fontWeight:'550', fontSize:'15px'}} >Sindh</Typography>
+                                  <Typography sx={{fontWeight:'650', fontSize:'19px'}} >6300</Typography>
                               </Box>
                               <Box sx={{display:'flex', flexDirection:'column'}}>
-                              <Typography sx={{fontWeight:'550', fontSize:'15px'}} >Punjab</Typography>
-                                  <Typography sx={{fontWeight:'650', fontSize:'19px'}} >3000</Typography>
+                              <Typography sx={{fontWeight:'550', fontSize:'15px'}} >KPK</Typography>
+                                  <Typography sx={{fontWeight:'650', fontSize:'19px'}} >3030</Typography>
                               </Box>
                           </Box>
                       </Paper>
@@ -499,7 +355,7 @@ const [timberValues, settimberValues] = useState(null)
                   <Box mb={3} sx={{ width: '100%', height: '50%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                     <Paper elevation={2} sx={{ width: '50%', margin: '0 auto', padding: '20px', backgroundColor: '#FBFBFB', borderRadius: '10px', display: 'flex', flexDirection: 'column' }}>
                         <Box mb={2} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography sx={{ fontSize: '20px', fontWeight: '700' }} >Growth</Typography>
+                            <Typography sx={{ fontSize: '20px', fontWeight: '700' }} >Timber Growth over the last decade</Typography>
                             <Typography sx={{ fontSize: '15px', fontWeight: '550' }} >This Year</Typography>
                         </Box>
                         <Chart
@@ -513,11 +369,11 @@ const [timberValues, settimberValues] = useState(null)
 
                     <Paper elevation={2} sx={{ width: '40%', margin: '0 auto', padding: '20px', backgroundColor: '#FBFBFB', borderRadius: '10px', display: 'flex', flexDirection: 'column' }}>
                         <Box mb={2} sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <Typography sx={{ fontSize: '20px', fontWeight: '700' }} >Users</Typography>
-                            <Select value={'year'}>
+                            <Typography sx={{ fontSize: '20px', fontWeight: '700' }} >Consumption index over the last decade</Typography>
+                            {/* <Select value={'year'}>
                                 <MenuItem value={'year'} >Year</MenuItem>
                                 <MenuItem value={'month'} >Month</MenuItem>
-                            </Select>
+                            </Select> */}
                         </Box>
                         <Chart
                             options={chartOptionsConsumption.options}
@@ -529,7 +385,7 @@ const [timberValues, settimberValues] = useState(null)
                     </Paper>
                 </Box>
 
-                <Box mb={3} sx={{ width: '100%', height: '50%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
+                {/* <Box mb={3} sx={{ width: '100%', height: '50%', display: 'flex', justifyContent: 'space-around', alignItems: 'center' }}>
                     <Box sx={{ width: '50%', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                         <Paper p={2} elevation={2} sx={{ width: '20%', height: '200px', margin: '0 auto', padding: '20px', backgroundColor: '#FBFBFB', borderRadius: '10px', display: 'flex', flexDirection: 'column' }}>
                             <Box mb={3} sx={{ height: '50px', width: '50px', backgroundColor: 'rgb(120, 236, 120)', borderRadius: '6px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -570,12 +426,12 @@ const [timberValues, settimberValues] = useState(null)
 
                     </Box>
 
-                </Box>
+                </Box> */}
 
             </Box>
             
             </Box>
-            </Box>
+            {/* </Box> */}
             
             </>
     );
